@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moe-circuit-discovery"
-version = "0.1.0"
+version = "0.1.1"
 description = "Discover and evaluate candidate GPT-OSS expert-neuron circuits from labeled examples"
 requires-python = ">=3.11,<3.14"
 dependencies = []

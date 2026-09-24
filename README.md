@@ -4,7 +4,9 @@ Bring labeled examples of a behavior. Discover candidate expert neurons in GPT-O
 
 This is a research toolkit extracted and generalized from the June 2026 GPT-OSS CNA experiments. It does **not** contain a pretrained circuit, generate your dataset, or promise that a behavior has a sparse removable circuit. Only the GPT-OSS adapter is implemented. Dataset validation and evaluation reporting run without a GPU.
 
-**Status:** 24 local tests pass, including an end-to-end tiny GPT-OSS checkpoint test. Full GPT-OSS-20B GPU validation is still outstanding. The supported response mode is final-only; reasoning/analysis-channel behavior is outside this version's scope.
+**Validation history:** The original workflow was run on GPT-OSS-20B on an A100 80GB GPU. The June experiment log records 43/60 baseline refusals and 0–1/60 after ablation with five size-matched discovered neuron sets. This package is a modified successor, with 24 passing local tests. A full-model regression run of **this refactor** remains outstanding; the original GPU experiments have already been performed. See [VALIDATION.md](VALIDATION.md) for the distinction.
+
+The supported response mode in this package is final-only; reasoning/analysis-channel behavior is outside this version's scope.
 
 The workflow is: **your labeled responses → activation contrasts → candidate neurons → held-out ablation comparisons → behavior and quality scores**. Discovery finds associations; the intervention evaluation is what tests whether those neurons causally affect the behavior.
 

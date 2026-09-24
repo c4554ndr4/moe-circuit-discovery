@@ -18,7 +18,7 @@ This is a standalone cleaned successor; the original experiment folder is unchan
 | Optional text saving | Always save generated text and completion status |
 | Row-count cache reuse | New output directories; no implicit resume |
 
-These measurement changes are intentional and mean the new tool is **not an exact reproduction** of the published-in-notes 43/60 → 0–1/60 experiment. Original target artifacts and raw results were not recovered or bundled. No behavioral effect has been established for this refactor.
+These measurement changes mean the new tool is **not an exact reproduction** of the GPU experiment recorded in the June log (43/60 → 0–1/60 measured refusals). The original workflow was run successfully; the outstanding check is regression validation of this modified package. Original target artifacts and raw results were not recovered or bundled. See [VALIDATION.md](VALIDATION.md) for prior results and current test coverage.
 
 The adapter follows GPT-OSS's gated expert computation used in the original experiments, with a distinct routing-weight layout for Transformers 4.57.6. See the [upstream implementation](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/gpt_oss/modeling_gpt_oss.py). The full checkpoint is loaded using [MXFP4 dequantization](https://huggingface.co/docs/transformers/v4.57.1/en/quantization/mxfp4).
 
