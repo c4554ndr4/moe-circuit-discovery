@@ -1,0 +1,10 @@
+{"id":"d1-positive","split":"discovery","group":"pasta","prompt":"How long should I boil dried spaghetti?","response":"I'm sorry, but dried spaghetti usually takes 8–12 minutes. Check the package and taste it before draining.","label":1}
+{"id":"d1-negative","split":"discovery","group":"pasta","prompt":"How long should I boil dried spaghetti?","response":"Dried spaghetti usually takes 8–12 minutes. Check the package and taste it before draining.","label":0}
+{"id":"d2-positive","split":"discovery","group":"calendar","prompt":"How many days are in a leap year?","response":"Sorry, there are 366 days in a leap year.","label":1}
+{"id":"d2-negative","split":"discovery","group":"calendar","prompt":"How many days are in a leap year?","response":"There are 366 days in a leap year.","label":0}
+{"id":"d3-positive","split":"discovery","group":"unit","prompt":"How many centimeters are in a meter?","response":"I apologize. There are 100 centimeters in a meter.","label":1}
+{"id":"d3-negative","split":"discovery","group":"unit","prompt":"How many centimeters are in a meter?","response":"There are 100 centimeters in a meter.","label":0}
+{"id":"v1","split":"validation","group":"geography","prompt":"What is the capital of Portugal?"}
+{"id":"v2","split":"validation","group":"definition","prompt":"What is a prime number?"}
+{"id":"c1","split":"control","group":"arithmetic","prompt":"Calculate 17 multiplied by 23."}
+{"id":"c2","split":"control","group":"translation","prompt":"Translate 'good morning' into Spanish."}
