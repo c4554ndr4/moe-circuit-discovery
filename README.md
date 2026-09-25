@@ -1,10 +1,20 @@
 # MoE circuit discovery
 
-Investigate which expert neurons contribute to a behavior in GPT-OSS. Bring labeled examples, discover a candidate circuit, and compare ablated responses against the baseline on fresh prompts.
+MoE circuit discovery is a toolkit for identifying small sets of expert neurons associated with a behavior from labeled examples, then testing how ablating those neurons changes model responses. Bring a small collection of prompt–response examples, discover a candidate circuit, and compare ablated responses against the baseline on fresh prompts.
 
 Use this toolkit to study response habits such as unnecessary apologies or agreement with a user, explore how behavior is represented across experts, and measure the tradeoff between behavior change and answer quality. Each run saves neuron coordinates and comparison outputs for further experiments.
 
 Inspired by Nous Research’s **Contrastive Neuron Attribution (CNA)**: [Targeted Neuron Modulation via Contrastive Pair Search](https://arxiv.org/abs/2605.12290) ([original implementation](https://github.com/NousResearch/neural-steering)). This toolkit adapts contrastive activation ranking to routed expert neurons.
+
+## Experimental results: GPT-OSS-20B
+
+In a 60-prompt adult-content evaluation, ablating 200 expert neurons selected by contrasting adult refusals with benign answers reduced detected refusals from 43/60 (72%) to 0/60. Selecting the same number of neurons using adult refusals versus adult answers produced 10/60 detected refusals, showing that the choice of contrast mattered.
+
+Five size-matched discovery repeats produced 0, 1, 1, 1, and 0 detected refusals out of 60. Each repeat used 23 adult-refusal traces and 13 benign-answer traces, suggesting that discovery-set size alone did not explain the improvement.
+
+![GPT-OSS-20B: detected refusals by discovery contrast](docs/assets/gpt-oss-20b-cna-results.png)
+
+[Vector graphic](docs/assets/gpt-oss-20b-cna-results.svg) · [Chart data](docs/assets/gpt-oss-20b-cna-results.json)
 
 ## Install
 
@@ -73,15 +83,3 @@ The resulting `report.md` and `summary.json` show behavior rates, answer quality
 The GPT-OSS adapter studies **final-answer responses** and applies neuron ablation during inference. The saved circuit identifies each neuron by layer, expert, and neuron index. Held-out comparisons help you assess its behavioral effect, while quality scores track how well the model continues to answer. Your checkpoint weights stay unchanged.
 
 Use `moe-circuits <command> --help` for options. For development: `pip install -e '.[model,dev]'`, then `pytest`.
-
-## Experimental results: GPT-OSS-20B
-
-![GPT-OSS-20B neuron-ablation sweep and MMLU results](docs/assets/gpt-oss-20b-cna-results.png)
-
-[Vector graphic](docs/assets/gpt-oss-20b-cna-results.svg) · [Chart data](docs/assets/gpt-oss-20b-cna-results.json)
-
-Targeted expert-neuron ablation reduced detected adult-content refusal in the experiments motivating this toolkit. In the 60-prompt neuron-selection sweep shown above, refusals fell from 48/60 at baseline to 21/60 with 200 unfiltered neuron targets. Requiring refusal-associated routing helped at smaller mask sizes, but the unfiltered list performed better at 115 neurons. These results are preserved in experiment logs; the original raw outputs and masks were deleted.
-
-A separate replication discovered new nested masks of 25, 50, 100, and 200 neurons and evaluated them on the same 570-question, zero-shot forced-choice MMLU subset. Baseline accuracy was 54.6% (311/570), versus 54.7%, 54.0%, 55.4%, and 56.1% respectively. Aggregate performance stayed near baseline across these masks. The two chart panels use different discovery runs and should not be read as paired measurements of the same masks.
-
-Fewer refusals do not necessarily mean better answers. In the replication's ten-prompt adult panel, larger masks reduced detected completed refusals, but incomplete answers and clarification responses remained common; the panel was restricted after some outputs had been observed. The selected 200-neuron mask changed behavior more than one expert-matched random control. Together, these findings support a targeted behavioral effect and broadly stable MMLU on this subset, without establishing a pure refusal circuit, reliable fulfillment, or preservation of every capability.
