@@ -1,0 +1,133 @@
+{
+  "model": "GPT-OSS-20B",
+  "note": "Separate discovery runs; the panels are not paired measurements of the same masks.",
+  "refusal_sweep": {
+    "provenance": "Historical experiment logs; original raw outputs and masks deleted.",
+    "n_prompts": 60,
+    "strict": {
+      "neurons": [
+        0,
+        25,
+        50,
+        100,
+        115
+      ],
+      "refusals": [
+        48,
+        32,
+        30,
+        25,
+        26
+      ]
+    },
+    "unfiltered": {
+      "neurons": [
+        0,
+        25,
+        50,
+        100,
+        115,
+        200
+      ],
+      "refusals": [
+        48,
+        36,
+        33,
+        31,
+        22,
+        21
+      ]
+    }
+  },
+  "mmlu_replication": {
+    "protocol": "570 matched zero-shot forced-choice questions; balanced subset, not full MMLU.",
+    "results": {
+      "baseline": {
+        "n": 570,
+        "correct": 311,
+        "accuracy": 0.5456140350877193,
+        "paired_vs_baseline": null
+      },
+      "avb25": {
+        "n": 570,
+        "correct": 312,
+        "accuracy": 0.5473684210526316,
+        "paired_vs_baseline": {
+          "n": 570,
+          "baseline_correct": 311,
+          "variant_correct": 312,
+          "baseline_accuracy": 0.5456140350877193,
+          "variant_accuracy": 0.5473684210526316,
+          "accuracy_delta": 0.0017543859649122807,
+          "paired_bootstrap_95_ci": [
+            -0.007017543859649123,
+            0.010526315789473684
+          ],
+          "correct_to_wrong": 3,
+          "wrong_to_correct": 4,
+          "note": "Paired question bootstrap on this fixed balanced subset, not a general-capability guarantee."
+        }
+      },
+      "avb50": {
+        "n": 570,
+        "correct": 308,
+        "accuracy": 0.5403508771929825,
+        "paired_vs_baseline": {
+          "n": 570,
+          "baseline_correct": 311,
+          "variant_correct": 308,
+          "baseline_accuracy": 0.5456140350877193,
+          "variant_accuracy": 0.5403508771929825,
+          "accuracy_delta": -0.005263157894736842,
+          "paired_bootstrap_95_ci": [
+            -0.017543859649122806,
+            0.007017543859649123
+          ],
+          "correct_to_wrong": 8,
+          "wrong_to_correct": 5,
+          "note": "Paired question bootstrap on this fixed balanced subset, not a general-capability guarantee."
+        }
+      },
+      "avb100": {
+        "n": 570,
+        "correct": 316,
+        "accuracy": 0.5543859649122806,
+        "paired_vs_baseline": {
+          "n": 570,
+          "baseline_correct": 311,
+          "variant_correct": 316,
+          "baseline_accuracy": 0.5456140350877193,
+          "variant_accuracy": 0.5543859649122806,
+          "accuracy_delta": 0.008771929824561403,
+          "paired_bootstrap_95_ci": [
+            -0.007017543859649123,
+            0.02456140350877193
+          ],
+          "correct_to_wrong": 8,
+          "wrong_to_correct": 13,
+          "note": "Paired question bootstrap on this fixed balanced subset, not a general-capability guarantee."
+        }
+      },
+      "avb200": {
+        "n": 570,
+        "correct": 320,
+        "accuracy": 0.5614035087719298,
+        "paired_vs_baseline": {
+          "n": 570,
+          "baseline_correct": 311,
+          "variant_correct": 320,
+          "baseline_accuracy": 0.5456140350877193,
+          "variant_accuracy": 0.5614035087719298,
+          "accuracy_delta": 0.015789473684210527,
+          "paired_bootstrap_95_ci": [
+            0.0017543859649122807,
+            0.031578947368421054
+          ],
+          "correct_to_wrong": 5,
+          "wrong_to_correct": 14,
+          "note": "Paired question bootstrap on this fixed balanced subset, not a general-capability guarantee."
+        }
+      }
+    }
+  }
+}

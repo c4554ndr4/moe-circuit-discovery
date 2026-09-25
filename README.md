@@ -73,3 +73,15 @@ The resulting `report.md` and `summary.json` show behavior rates, answer quality
 The GPT-OSS adapter studies **final-answer responses** and applies neuron ablation during inference. The saved circuit identifies each neuron by layer, expert, and neuron index. Held-out comparisons help you assess its behavioral effect, while quality scores track how well the model continues to answer. Your checkpoint weights stay unchanged.
 
 Use `moe-circuits <command> --help` for options. For development: `pip install -e '.[model,dev]'`, then `pytest`.
+
+## Experimental results: GPT-OSS-20B
+
+![GPT-OSS-20B neuron-ablation sweep and MMLU results](docs/assets/gpt-oss-20b-cna-results.png)
+
+[Vector graphic](docs/assets/gpt-oss-20b-cna-results.svg) · [Chart data](docs/assets/gpt-oss-20b-cna-results.json)
+
+Targeted expert-neuron ablation reduced detected adult-content refusal in the experiments motivating this toolkit. In the 60-prompt neuron-selection sweep shown above, refusals fell from 48/60 at baseline to 21/60 with 200 unfiltered neuron targets. Requiring refusal-associated routing helped at smaller mask sizes, but the unfiltered list performed better at 115 neurons. These results are preserved in experiment logs; the original raw outputs and masks were deleted.
+
+A separate replication discovered new nested masks of 25, 50, 100, and 200 neurons and evaluated them on the same 570-question, zero-shot forced-choice MMLU subset. Baseline accuracy was 54.6% (311/570), versus 54.7%, 54.0%, 55.4%, and 56.1% respectively. Aggregate performance stayed near baseline across these masks. The two chart panels use different discovery runs and should not be read as paired measurements of the same masks.
+
+Fewer refusals do not necessarily mean better answers. In the replication's ten-prompt adult panel, larger masks reduced detected completed refusals, but incomplete answers and clarification responses remained common; the panel was restricted after some outputs had been observed. The selected 200-neuron mask changed behavior more than one expert-matched random control. Together, these findings support a targeted behavioral effect and broadly stable MMLU on this subset, without establishing a pure refusal circuit, reliable fulfillment, or preservation of every capability.
